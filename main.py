@@ -1,21 +1,22 @@
-#coding:utf-8
+# ecoding: utf-8
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
+from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import WebDriverWait # available since 2.4.0
+from selenium.webdriver.support import expected_conditions as EC # available since 2.26.0
+from selenium.webdriver.common.keys import Keys 
 import time
-from utils.asynch import asynch
+from parser import extract
 
-@asynch
-def add1(a, b):
-    time.sleep(2)
-    return a+b
+driver = webdriver.Chrome()
 
-@asynch
-def add2(a, b):
-    time.sleep(4)
-    return a+b
+driver.get("http://music.163.com/")
+driver.switch_to.frame("contentFrame")
+atags = driver.find_elements_by_tag_name("a");
+for a in atags:
+    print a.get_attribute("href")
 
-
-if __name__ == '__main__':
-   ha = add1(1,2)
-   hb = add2(2,3)
-   print ha.get_result()
-   print hb.get_result()
+driver.quit()
