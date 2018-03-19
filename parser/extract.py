@@ -131,8 +131,8 @@ def __get_comment_what(element):
     cnt = element.find_element_by_xpath(".//div[contains(@class, 'cnt')]")
     index = cnt.text.find("：")
     if index >= 0:
-        return element.text[index+1:]
-    return element.text
+        return cnt.text[index+1:]
+    return cnt.text
 
 def __get_comment_when(element):
     rp = element.find_element_by_xpath(".//div[@class='rp']")

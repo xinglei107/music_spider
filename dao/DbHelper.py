@@ -5,18 +5,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from contextlib import contextmanager
 
-class DbHelper(object):
-    """
-        操作数据库
-    """
-    def __init__(self, arg):
-        super(DbHelper, self).__init__()
-        self.arg = arg
-
-mysql_path = "mysql+pymysql://{user}:{pwd}@{ip}:{port}/{dbname}?charset=utf-8".format(MYSQL_INFO)
+mysql_path = "mysql+pymysql://{user}:{pwd}@{ip}:{port}/{dbname}?charset=utf8".format(**MYSQL_INFO)
 engine = create_engine(mysql_path, pool_size=10, pool_recycle=3600, max_overflow=5, pool_pre_ping=True)
 Session = sessionmaker(bind=engine)
-
 
 
 @contextmanager
@@ -26,6 +17,7 @@ def session_scope():
         yield session
         session.commit()
     except Exception as e:
+        logger.error("", exc_info=True)
         session.rollback()
     finally:
         session.close()

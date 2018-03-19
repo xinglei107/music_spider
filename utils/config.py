@@ -6,6 +6,7 @@ import kms
 
 PROJECT_NAME = "music_spider"
 LOG_PATH = "/opt/logs/music_spider/music_spider.log"
+MUSIC_PATH = "/Users/lei/Music/spider/"
 
 class Logger(object):
     
@@ -27,6 +28,13 @@ MYSQL_INFO = {
     "ip" : kms.get(PROJECT_NAME, "mysql.ip"),
     "port" : kms.get(PROJECT_NAME, "mysql.port"),
     "dbname" : kms.get(PROJECT_NAME, "mysql.dbname")
+}
+WANGYI_LINK_TYPE = {
+    "artist" : "",
+    "playlist" : "",
+    "dj" : "",
+    "album" : "",
+    "toplist" : ""
 }
 OK = 1
 NOT_OK = 0
